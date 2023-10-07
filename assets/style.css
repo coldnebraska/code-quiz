@@ -5,33 +5,89 @@ header {
     font-size: 120%;
 }
 
-header a {
-    margin-left: 30px;
-    text-decoration: none;
-    color: blueviolet;
-}
-
 header div {
     margin-right: 30px;
 }
 
-.quiz {
+#highscore-button {
+    margin-left: 30px;
+    background-color: white;
+    color: blueviolet;
+    border: none;
+}
+
+#highscore-button:hover {
+    cursor: pointer;
+}
+
+#return-button {
+    margin-left: 30px;
+    background-color: white;
+    color: blueviolet;
+    border: none;
+    margin-top: 22px;
+}
+
+#return-button:hover {
+    cursor: pointer;
+}
+
+#highscore-title {
+    text-align: center;
+    font-size: 300%;
+    margin: 0;
+}
+
+#quiz {
     margin-top: 100px;
     text-align: center;
 }
 
-.quiz h1 {
+#quiz h1 {
     font-size: 300%;
 }
 
-.quiz p {
+#quiz p {
     font-size: 200%;
 }
 
-.quiz button {
+#quiz button {
     background-color: blueviolet;
     color: white;
     font-size: 30px;
     padding: 10px;
     border-radius: 5px;
+}
+
+.list-divider {
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
+#user-list {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    list-style: none;
+    font-size: 200%;
+    padding: 0;
+}
+
+#user-list li {
+    padding: 10px;
+    border-bottom: 2px solid lightgrey;
+}
+
+#score-list {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    list-style: none;
+    font-size: 200%;
+}
+
+#score-list li {
+    padding: 10px;
+    border-bottom: 2px solid lightgrey;
 }
