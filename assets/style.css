@@ -1,0 +1,16 @@
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 120%;
+}
+
+header a {
+    margin-left: 30px;
+    text-decoration: none;
+    color: blueviolet;
+}
+
+header div {
+    margin-right: 30px;
+}
