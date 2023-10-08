@@ -9,6 +9,7 @@ let header = document.getElementById("header")
 let timer = document.getElementById("timer")
 let questionText = document.getElementById("question")
 let answerText = document.getElementById("answers")
+let guess = document.getElementById("guess")
 
 // object of the five questions and their respective choices
 let questions = {
@@ -98,7 +99,6 @@ function displayWrong() {
 
 function displayQuestion1() {
     questionText.textContent = questions.question[0]
-    console.log(questionText)
     for (i = 1; i <= 4; i++) {
         let li = document.createElement("button")
         li.textContent = i + ". " + questions.answer1[i-1]
@@ -117,7 +117,10 @@ function displayQuestion1() {
 
 function displayQuestion2() {
     let timeLeft = 2
-    console.log("Correct") // TODO: convert to display message
+    console.log("Question 1: Correct") // TODO: convert to display message
+    guess.textContent = "Correct!"
+    guess.setAttribute("id", "guess")
+    guess.setAttribute("style", "border-top: 3px lightgrey solid")
 
     let timeInterval = setInterval(function() {
         timeLeft--
@@ -125,7 +128,8 @@ function displayQuestion2() {
         clearInterval(timeInterval)
         answerText.textContent = ""
         questionText.textContent = questions.question[1]
-        console.log(questionText)
+        guess.textContent = ""
+        guess.setAttribute("style", "border-top: none")
         for (i = 1; i <= 4; i++) {
             let li = document.createElement("button")
             li.textContent = i + ". " + questions.answer2[i-1]
@@ -146,7 +150,10 @@ function displayQuestion2() {
 
 function displayQuestion3() {
     let timeLeft = 2
-    console.log("Correct") // TODO: convert to display message
+    console.log("Question 2: Correct") // TODO: convert to display message
+    guess.textContent = "Correct!"
+    guess.setAttribute("id", "guess")
+    guess.setAttribute("style", "border-top: 5px grey solid")
 
     let timeInterval = setInterval(function() {
         timeLeft--
@@ -154,7 +161,8 @@ function displayQuestion3() {
         clearInterval(timeInterval)
         answerText.textContent = ""
         questionText.textContent = questions.question[2]
-        console.log(questionText)
+        guess.textContent = ""
+        guess.setAttribute("style", "border-top: none")
         for (i = 1; i <= 4; i++) {
             let li = document.createElement("button")
             li.textContent = i + ". " + questions.answer3[i-1]
@@ -175,7 +183,10 @@ function displayQuestion3() {
 
 function displayQuestion4() {
     let timeLeft = 2
-    console.log("Correct") // TODO: convert to display message
+    console.log("Question 3: Correct") // TODO: convert to display message
+    guess.textContent = "Correct!"
+    guess.setAttribute("id", "guess")
+    guess.setAttribute("style", "border-top: 5px grey solid")
 
     let timeInterval = setInterval(function() {
         timeLeft--
@@ -183,7 +194,8 @@ function displayQuestion4() {
         clearInterval(timeInterval)
         answerText.textContent = ""
         questionText.textContent = questions.question[3]
-        console.log(questionText)
+        guess.textContent = ""
+        guess.setAttribute("style", "border-top: none")
         for (i = 1; i <= 4; i++) {
             let li = document.createElement("button")
             li.textContent = i + ". " + questions.answer4[i-1]
@@ -204,7 +216,10 @@ function displayQuestion4() {
 
 function displayQuestion5() {
     let timeLeft = 2
-    console.log("Correct") // TODO: convert to display message
+    console.log("Question 4: Correct") // TODO: convert to display message
+    guess.textContent = "Correct!"
+    guess.setAttribute("id", "guess")
+    guess.setAttribute("style", "border-top: 5px grey solid")
 
     let timeInterval = setInterval(function() {
         timeLeft--
@@ -212,7 +227,8 @@ function displayQuestion5() {
         clearInterval(timeInterval)
         answerText.textContent = ""
         questionText.textContent = questions.question[4]
-        console.log(questionText)
+        guess.textContent = ""
+        guess.setAttribute("style", "border-top: none")
         for (i = 1; i <= 4; i++) {
             let li = document.createElement("button")
             li.textContent = i + ". " + questions.answer5[i-1]
@@ -233,7 +249,10 @@ function displayQuestion5() {
 
 function endScreen() {
     let timeLeft = 2
-    console.log("Correct") // TODO: convert to display message
+    console.log("Question 5: Correct") // TODO: convert to display message
+    guess.textContent = "Correct!"
+    guess.setAttribute("id", "guess")
+    guess.setAttribute("style", "border-top: 5px grey solid")
 
     let timeInterval = setInterval(function() {
         timeLeft--
@@ -242,12 +261,15 @@ function endScreen() {
         questionText.innerHTML = "" // removes main content
         answerText.innerHTML = "" // removes main content
         clearInterval(mainInterval)
+        guess.textContent = ""
+        guess.setAttribute("style", "border-top: none")
     }
     }, 1000)
 }
 
 function startQuiz() {
     countdown()
+    
     quiz.innerHTML = "" // removes main content
     highscoreButton.textContent = "" // removes view highscores button
 

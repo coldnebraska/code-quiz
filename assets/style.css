@@ -49,9 +49,12 @@ header div {
 
 #quiz p {
     font-size: 200%;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 #quiz button {
+    margin-top: 50px;
     background-color: blueviolet;
     color: white;
     font-size: 30px;
@@ -94,14 +97,15 @@ header div {
 }
 
 #question {
+    margin-left: 21%;
     font-size: 250%;
-    text-align: center;
+    margin-right: 10%;
 }
 
 #answers {
     display: flex;
     flex-direction: column;
-    width: 15%;
+    width: 16%;
     margin-left: 18%;
 }
 
@@ -113,5 +117,12 @@ header div {
     color: white;
     background-color: blueviolet;
     border-radius: 5px;
-    box-shadow: 5gitpx 5px 5px darkslategrey;
+    box-shadow: 5px 5px 5px darkslategrey;
+}
+
+#guess {
+    color: grey;
+    margin-left: 21%;
+    padding-top: 10px;
+    width: 70%;
 }
