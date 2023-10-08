@@ -57,6 +57,7 @@ header div {
     font-size: 30px;
     padding: 10px;
     border-radius: 5px;
+    box-shadow: 5px 5px 5px darkslategrey;
 }
 
 .list-divider {
@@ -112,5 +113,5 @@ header div {
     color: white;
     background-color: blueviolet;
     border-radius: 5px;
-    box-shadow: 8px 5px 5px darkslategrey;
+    box-shadow: 5gitpx 5px 5px darkslategrey;
 }
