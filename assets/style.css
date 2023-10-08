@@ -5,6 +5,11 @@ header {
     font-size: 120%;
 }
 
+input {
+    margin: 15px;
+    height: 25px;
+}
+
 header div {
     margin-right: 30px;
 }
@@ -53,11 +58,22 @@ header div {
     margin-bottom: 10px;
 }
 
-#quiz button {
+#start-button {
     margin-top: 50px;
+    width:fit-content;
     background-color: blueviolet;
     color: white;
     font-size: 30px;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px darkslategrey;
+}
+
+#submit {
+    margin-top: 15px;
+    background-color: blueviolet;
+    color: white;
+    font-size: 20px;
     padding: 10px;
     border-radius: 5px;
     box-shadow: 5px 5px 5px darkslategrey;

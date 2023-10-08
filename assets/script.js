@@ -29,6 +29,7 @@ let scores =  []
 function setHighscore() {
     localStorage.setItem("initials", JSON.stringify(initials))
     localStorage.setItem("scores", JSON.stringify(scores))
+    console.log("scores saved")
 }
 
 function viewHighscores() {
@@ -82,7 +83,7 @@ let timeUp = document.getElementById("time-up")
 }
 
 // countdown timer
-let totalTime = 75 // TODO: make sure timer is set to 75
+let totalTime = 1 // TODO: make sure timer is set to 75
 let mainInterval = 0
 function countdown() {
     mainInterval = setInterval(function() {
@@ -99,7 +100,7 @@ function countdown() {
 function displayWrong() {
     let timeLeft = 2
     totalTime -= 10
-    
+
     console.log("Wrong")
     guess.textContent = "Wrong."
     guess.setAttribute("id", "guess")
@@ -297,6 +298,32 @@ function endScreen() {
 
     timeUp.textContent = ""
     timeUp.setAttribute("style", "border-top: none")
+
+    let h1 = document.createElement("h1")
+    quiz.appendChild(h1)
+    h1.setAttribute("id", "content-header")
+    h1.textContent = "Quiz Complete!"
+
+    let p = document.createElement("p")
+    quiz.appendChild(p)
+    p.textContent = "Please Input Initials"
+
+    let flex = document.createElement("div")
+    flex.setAttribute("style", "display:flex; flex-direction:column; align-items:center")
+    quiz.appendChild(flex)
+
+    let input = document.createElement("input")
+    input.setAttribute("type", "text")
+    input.setAttribute("style", "width:15%")
+    flex.appendChild(input)
+
+    let submit = document.createElement("button")
+    submit.textContent = "Submit"
+    submit.setAttribute("id", "submit")
+    submit.setAttribute("style", "width:10%")
+    flex.appendChild(submit)
+
+    submit.addEventListener("click", setHighscore)
 }
 
 function startQuiz() {
