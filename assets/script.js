@@ -67,28 +67,183 @@ function viewHighscores() {
 }
 
 // countdown timer
+let totalTime = 75
+let mainInterval = 0
 function countdown() {
-    // TODO: change timer to 60
-    let timeLeft = 5
-
-    let timeInterval = setInterval(function() {
-        timeLeft--
-        timer.textContent = timeLeft
-    if (timeLeft == 0) {
-        clearInterval(timeInterval)
+    mainInterval = setInterval(function() {
+        totalTime--
+        timer.textContent = totalTime
+    if (totalTime == 0) {
+        clearInterval(mainInterval)
         timesUp()
     }
     }, 1000)
 }
 
-function displayQuestion() {
+function displayWrong() {
+    let timeLeft = 2
+    console.log("Wrong")
+    totalTime -= 10
+
+    let timeInterval = setInterval(function() {
+        timeLeft--
+    if (timeLeft == 0) {
+        clearInterval(timeInterval)
+        console.log("Moving On")
+    }
+    }, 1000)
+}
+
+
+
+function displayQuestion1() {
     questionText.textContent = questions.question[0]
+    console.log(questionText)
     for (i = 1; i <= 4; i++) {
         let li = document.createElement("button")
         li.textContent = i + ". " + questions.answer1[i-1]
-        li.setAttribute("id", i)
+        li.setAttribute("id", "answer" + i)
         answerText.appendChild(li)
     }
+    let answerButton1 = document.getElementById("answer1")
+    let answerButton2 = document.getElementById("answer2")
+    let answerButton3 = document.getElementById("answer3")
+    let answerButton4 = document.getElementById("answer4")
+    answerButton1.addEventListener("click", displayWrong)
+    answerButton2.addEventListener("click", displayWrong)
+    answerButton3.addEventListener("click", displayQuestion2)
+    answerButton4.addEventListener("click", displayWrong)
+}
+
+function displayQuestion2() {
+    let timeLeft = 2
+    console.log("Correct") // TODO: convert to display message
+
+    let timeInterval = setInterval(function() {
+        timeLeft--
+    if (timeLeft == 0) {
+        clearInterval(timeInterval)
+        answerText.textContent = ""
+        questionText.textContent = questions.question[1]
+        console.log(questionText)
+        for (i = 1; i <= 4; i++) {
+            let li = document.createElement("button")
+            li.textContent = i + ". " + questions.answer2[i-1]
+            li.setAttribute("id", "answer" + i)
+            answerText.appendChild(li)
+        }
+        let answerButton1 = document.getElementById("answer1")
+        let answerButton2 = document.getElementById("answer2")
+        let answerButton3 = document.getElementById("answer3")
+        let answerButton4 = document.getElementById("answer4")
+        answerButton1.addEventListener("click", displayWrong)
+        answerButton2.addEventListener("click", displayWrong)
+        answerButton3.addEventListener("click", displayQuestion3)
+        answerButton4.addEventListener("click", displayWrong)
+    }
+    }, 1000)
+}
+
+function displayQuestion3() {
+    let timeLeft = 2
+    console.log("Correct") // TODO: convert to display message
+
+    let timeInterval = setInterval(function() {
+        timeLeft--
+    if (timeLeft == 0) {
+        clearInterval(timeInterval)
+        answerText.textContent = ""
+        questionText.textContent = questions.question[2]
+        console.log(questionText)
+        for (i = 1; i <= 4; i++) {
+            let li = document.createElement("button")
+            li.textContent = i + ". " + questions.answer3[i-1]
+            li.setAttribute("id", "answer" + i)
+            answerText.appendChild(li)
+        }
+        let answerButton1 = document.getElementById("answer1")
+        let answerButton2 = document.getElementById("answer2")
+        let answerButton3 = document.getElementById("answer3")
+        let answerButton4 = document.getElementById("answer4")
+        answerButton1.addEventListener("click", displayWrong)
+        answerButton2.addEventListener("click", displayWrong)
+        answerButton3.addEventListener("click", displayWrong)
+        answerButton4.addEventListener("click", displayQuestion4)
+    }
+    }, 1000)
+}
+
+function displayQuestion4() {
+    let timeLeft = 2
+    console.log("Correct") // TODO: convert to display message
+
+    let timeInterval = setInterval(function() {
+        timeLeft--
+    if (timeLeft == 0) {
+        clearInterval(timeInterval)
+        answerText.textContent = ""
+        questionText.textContent = questions.question[3]
+        console.log(questionText)
+        for (i = 1; i <= 4; i++) {
+            let li = document.createElement("button")
+            li.textContent = i + ". " + questions.answer4[i-1]
+            li.setAttribute("id", "answer" + i)
+            answerText.appendChild(li)
+        }
+        let answerButton1 = document.getElementById("answer1")
+        let answerButton2 = document.getElementById("answer2")
+        let answerButton3 = document.getElementById("answer3")
+        let answerButton4 = document.getElementById("answer4")
+        answerButton1.addEventListener("click", displayWrong)
+        answerButton2.addEventListener("click", displayWrong)
+        answerButton3.addEventListener("click", displayQuestion5)
+        answerButton4.addEventListener("click", displayWrong)
+    }
+    }, 1000)
+}
+
+function displayQuestion5() {
+    let timeLeft = 2
+    console.log("Correct") // TODO: convert to display message
+
+    let timeInterval = setInterval(function() {
+        timeLeft--
+    if (timeLeft == 0) {
+        clearInterval(timeInterval)
+        answerText.textContent = ""
+        questionText.textContent = questions.question[4]
+        console.log(questionText)
+        for (i = 1; i <= 4; i++) {
+            let li = document.createElement("button")
+            li.textContent = i + ". " + questions.answer5[i-1]
+            li.setAttribute("id", "answer" + i)
+            answerText.appendChild(li)
+        }
+        let answerButton1 = document.getElementById("answer1")
+        let answerButton2 = document.getElementById("answer2")
+        let answerButton3 = document.getElementById("answer3")
+        let answerButton4 = document.getElementById("answer4")
+        answerButton1.addEventListener("click", displayWrong)
+        answerButton2.addEventListener("click", displayWrong)
+        answerButton3.addEventListener("click", displayWrong)
+        answerButton4.addEventListener("click", endScreen)
+    }
+    }, 1000)
+}
+
+function endScreen() {
+    let timeLeft = 2
+    console.log("Correct") // TODO: convert to display message
+
+    let timeInterval = setInterval(function() {
+        timeLeft--
+    if (timeLeft == 0) {
+        clearInterval(timeInterval)
+        questionText.innerHTML = "" // removes main content
+        answerText.innerHTML = "" // removes main content
+        clearInterval(mainInterval)
+    }
+    }, 1000)
 }
 
 function startQuiz() {
@@ -96,7 +251,7 @@ function startQuiz() {
     quiz.innerHTML = "" // removes main content
     highscoreButton.textContent = "" // removes view highscores button
 
-    displayQuestion()
+    displayQuestion1()
 }
 
 // Pulls local data for previous scores (if any)
