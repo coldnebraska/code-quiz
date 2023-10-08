@@ -7,19 +7,23 @@ let userList = document.getElementById("user-list")
 let scoreList = document.getElementById("score-list")
 let header = document.getElementById("header")
 let timer = document.getElementById("timer")
+let questionText = document.getElementById("question")
+let answerText = document.getElementById("answers")
 
 // object of the five questions and their respective choices
 let questions = {
     question: ["Commonly used data type DO NOT include:", "The condition in an if / else statement is enclosed with _____.", "Arrays in JavaScript can be used to store _____.", "String values must be enclosed within _____ when being assigned to variables.", "A very useful tool used during development and debugging for prining content to the debugger is:"],
-    choice1: ["Strings", "Quotes", "Numbers and Strings", "Commas", "JavaScript"],
-    choice2: ["Boolean", "Curly Brackets", "Other Arrays", "Curly Brackets", "Terminal/Bash"],
-    choice3: ["Alerts", "Parenthesis", "Booleans", "Quotes", "For Loops"],
-    choice4: ["Numbers", "Square Brackets", "All of the Above", "Parenthesis", "Console.log"],
+    answer1: ["Strings", "Boolean", "Alerts", "Numbers"],
+    answer2: ["Quotes", "Curly Brackets", "Parenthesis", "Square Brackets"],
+    answer3: ["Numbers and Strings", "Other Arrays", "Booleans", "All of the Above"],
+    answer4: ["Commas", "Curly Brackets", "Quotes", "Parenthesis"],
+    answer5: ["JavaScript", "Terminal/Bash", "For Loops", "Console.log"]
 }
 
-let initials =  ["DB"]
-let scores =  [0]
+let initials =  ["DB", "SO"]
+let scores =  [0, 1]
 
+// stores highscores to local storage
 function setHighscore() {
     localStorage.setItem("initials", JSON.stringify(initials))
     localStorage.setItem("scores", JSON.stringify(scores))
@@ -58,6 +62,11 @@ function viewHighscores() {
     }
 }
 
+ function timesUp() {
+    
+}
+
+// countdown timer
 function countdown() {
     // TODO: change timer to 60
     let timeLeft = 5
@@ -67,14 +76,27 @@ function countdown() {
         timer.textContent = timeLeft
     if (timeLeft == 0) {
         clearInterval(timeInterval)
-        endScreen()
+        timesUp()
     }
     }, 1000)
 }
 
+function displayQuestion() {
+    questionText.textContent = questions.question[0]
+    for (i = 1; i <= 4; i++) {
+        let li = document.createElement("button")
+        li.textContent = i + ". " + questions.answer1[i-1]
+        li.setAttribute("id", i)
+        answerText.appendChild(li)
+    }
+}
+
 function startQuiz() {
-    quiz.innerHTML = "" // removes main content
     countdown()
+    quiz.innerHTML = "" // removes main content
+    highscoreButton.textContent = "" // removes view highscores button
+
+    displayQuestion()
 }
 
 // Pulls local data for previous scores (if any)

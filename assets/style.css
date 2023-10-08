@@ -91,3 +91,26 @@ header div {
     padding: 10px;
     border-bottom: 2px solid lightgrey;
 }
+
+#question {
+    font-size: 250%;
+    text-align: center;
+}
+
+#answers {
+    display: flex;
+    flex-direction: column;
+    width: 15%;
+    margin-left: 18%;
+}
+
+#answers button {
+    text-align: left;
+    font-size: 110%;
+    margin-bottom: 15px;
+    padding: 10px;
+    color: white;
+    background-color: blueviolet;
+    border-radius: 5px;
+    box-shadow: 8px 5px 5px darkslategrey;
+}
