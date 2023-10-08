@@ -126,3 +126,10 @@ header div {
     padding-top: 10px;
     width: 70%;
 }
+
+#time-up {
+    color: grey;
+    margin-left: 21%;
+    padding-top: 10px;
+    width: 70%;
+}

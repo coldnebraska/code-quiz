@@ -21,8 +21,9 @@ let questions = {
     answer5: ["JavaScript", "Terminal/Bash", "For Loops", "Console.log"]
 }
 
-let initials =  ["DB", "SO"]
-let scores =  [0, 1]
+// previous highscores
+let initials =  []
+let scores =  []
 
 // stores highscores to local storage
 function setHighscore() {
@@ -34,20 +35,20 @@ function viewHighscores() {
     quiz.innerHTML = "" // removes main content
     header.innerHTML = "" //removes header content
 
-    // Adds return button
+    // adds return button to highscore page
     let returnMain = document.createElement("button")
     returnMain.textContent = "Return to Menu"
     returnMain.setAttribute("id", "return-button")
     header.appendChild(returnMain)
 
-    // refreshes page to bring back to main look
+    // refreshes page to bring back to main menu
     function pageRefresh() {
         window.location.reload()
     }
     returnMain.addEventListener("click", pageRefresh)
     highscoreTitle.textContent = "Highscores"
     
-    // loops through previous scores arrays
+    // loops through previous highscores arrays
     for (i = 0; i < initials.length; i++) {
         let li = document.createElement("li")
         li.textContent = " User: " + initials[i]
@@ -62,13 +63,26 @@ function viewHighscores() {
         scoreList.appendChild(li)
     }
 }
-
+let timeUp = document.getElementById("time-up")
  function timesUp() {
-    
+    let timeLeft = 2
+    console.log("Time's Up")
+    timeUp.textContent = "Time's Up!"
+    timeUp.setAttribute("id", "time-up")
+    timeUp.setAttribute("style", "border-top: 3px lightgrey solid")
+
+    let timeInterval = setInterval(function() {
+        timeLeft--
+    if (timeLeft == 0) {
+        clearInterval(timeInterval)
+        clearInterval(mainInterval)
+        endScreen()
+    }
+    }, 1000)
 }
 
 // countdown timer
-let totalTime = 75
+let totalTime = 5 // TODO: make sure timer is set to 75
 let mainInterval = 0
 function countdown() {
     mainInterval = setInterval(function() {
@@ -81,6 +95,7 @@ function countdown() {
     }, 1000)
 }
 
+// displays when wrong answer is selected
 function displayWrong() {
     let timeLeft = 2
     console.log("Wrong")
@@ -94,9 +109,7 @@ function displayWrong() {
     }
     }, 1000)
 }
-
-
-
+// displays for each question (individual)
 function displayQuestion1() {
     questionText.textContent = questions.question[0]
     for (i = 1; i <= 4; i++) {
@@ -242,12 +255,13 @@ function displayQuestion5() {
         answerButton1.addEventListener("click", displayWrong)
         answerButton2.addEventListener("click", displayWrong)
         answerButton3.addEventListener("click", displayWrong)
-        answerButton4.addEventListener("click", endScreen)
+        answerButton4.addEventListener("click", displayCorrect)
     }
     }, 1000)
 }
 
-function endScreen() {
+// display for getting question 5 correct
+function displayCorrect() {
     let timeLeft = 2
     console.log("Question 5: Correct") // TODO: convert to display message
     guess.textContent = "Correct!"
@@ -258,25 +272,37 @@ function endScreen() {
         timeLeft--
     if (timeLeft == 0) {
         clearInterval(timeInterval)
+        clearInterval(mainInterval)
         questionText.innerHTML = "" // removes main content
         answerText.innerHTML = "" // removes main content
-        clearInterval(mainInterval)
+
         guess.textContent = ""
         guess.setAttribute("style", "border-top: none")
+
+        endScreen()
     }
     }, 1000)
 }
 
+// display end screen
+function endScreen() {
+    questionText.innerHTML = "" // removes main content
+    answerText.innerHTML = "" // removes main content
+
+    timeUp.textContent = ""
+    timeUp.setAttribute("style", "border-top: none")
+}
+
 function startQuiz() {
     countdown()
-    
+
     quiz.innerHTML = "" // removes main content
     highscoreButton.textContent = "" // removes view highscores button
 
     displayQuestion1()
 }
 
-// Pulls local data for previous scores (if any)
+// pulls local data for previous scores (if any)
 function getHighscore() {
     let getInitials = JSON.parse(localStorage.getItem("initials"))
     let getScores = JSON.parse(localStorage.getItem("scores"))
