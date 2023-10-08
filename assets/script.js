@@ -82,7 +82,7 @@ let timeUp = document.getElementById("time-up")
 }
 
 // countdown timer
-let totalTime = 5 // TODO: make sure timer is set to 75
+let totalTime = 75 // TODO: make sure timer is set to 75
 let mainInterval = 0
 function countdown() {
     mainInterval = setInterval(function() {
@@ -98,14 +98,20 @@ function countdown() {
 // displays when wrong answer is selected
 function displayWrong() {
     let timeLeft = 2
-    console.log("Wrong")
     totalTime -= 10
+    
+    console.log("Wrong")
+    guess.textContent = "Wrong."
+    guess.setAttribute("id", "guess")
+    guess.setAttribute("style", "border-top: 3px lightgrey solid")
 
     let timeInterval = setInterval(function() {
         timeLeft--
     if (timeLeft == 0) {
         clearInterval(timeInterval)
         console.log("Moving On")
+        guess.textContent = ""
+        guess.setAttribute("style", "border-top: none")
     }
     }, 1000)
 }
