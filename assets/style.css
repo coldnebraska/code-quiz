@@ -136,6 +136,14 @@ header div {
     width: 30%;
 }
 
+#answers button:hover {
+    background-color: magenta;
+}
+
+#quiz button:hover {
+    background-color: magenta;
+}
+
 #guess {
     color: grey;
     margin-left: 21%;
