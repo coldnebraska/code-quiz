@@ -11,6 +11,9 @@ let questionText = document.getElementById("question")
 let answerText = document.getElementById("answers")
 let guess = document.getElementById("guess")
 
+// TODO: add clear highscores button
+// TODO: make submit button redirect to highscores
+
 // object of the five questions and their respective choices
 let questions = {
     question: ["Commonly used data type DO NOT include:", "The condition in an if / else statement is enclosed with _____.", "Arrays in JavaScript can be used to store _____.", "String values must be enclosed within _____ when being assigned to variables.", "A very useful tool used during development and debugging for prining content to the debugger is:"],
@@ -57,6 +60,20 @@ function setHighscore() {
     }
 }
 
+function clearHighscores() {
+    let getInitials = JSON.parse(localStorage.getItem("initials"))
+    let getScores = JSON.parse(localStorage.getItem("scores"))
+
+    getInitials = []
+    getScores = []
+
+    localStorage.setItem("initials", JSON.stringify(getInitials))
+    localStorage.setItem("scores", JSON.stringify(getScores))
+
+    userList.innerHTML = ""
+    scoreList.innerHTML = ""
+}
+
 function viewHighscores() {
     quiz.innerHTML = "" // removes main content
     header.innerHTML = "" //removes header content
@@ -73,6 +90,14 @@ function viewHighscores() {
     }
     returnMain.addEventListener("click", pageRefresh)
     highscoreTitle.textContent = "Highscores"
+
+    // adds clear highscore button to highscore page
+    let clearScores = document.createElement("button")
+    clearScores.textContent = "Clear Highscores"
+    clearScores.setAttribute("id", "clear-button")
+    header.appendChild(clearScores)
+
+    clearScores.addEventListener("click", clearHighscores)
     
     // loops through previous highscores arrays
     for (i = 0; i < initials.length; i++) {
