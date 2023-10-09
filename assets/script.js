@@ -251,8 +251,8 @@ function displayQuestion() {
         let answerButton4 = document.getElementById("answer4")
         answerButton1.addEventListener("click", displayWrong)
         answerButton2.addEventListener("click", displayWrong)
-        answerButton3.addEventListener("click", displayCorrect)
-        answerButton4.addEventListener("click", displayWrong)
+        answerButton3.addEventListener("click", displayWrong)
+        answerButton4.addEventListener("click", displayCorrect)
     } else if (questionNumber == 4) {
         questionText.textContent = questions.question[3]
         answerText.textContent = ""
@@ -285,8 +285,8 @@ function displayQuestion() {
         let answerButton4 = document.getElementById("answer4")
         answerButton1.addEventListener("click", displayWrong)
         answerButton2.addEventListener("click", displayWrong)
-        answerButton3.addEventListener("click", displayCorrect)
-        answerButton4.addEventListener("click", displayWrong)
+        answerButton3.addEventListener("click", displayWrong)
+        answerButton4.addEventListener("click", displayCorrect)
     }
 }
 
