@@ -21,15 +21,40 @@ let questions = {
     answer5: ["JavaScript", "Terminal/Bash", "For Loops", "Console.log"]
 }
 
-// previous highscores
+let questionNumber = 1
+let currentScore = 0
+
 let initials =  []
 let scores =  []
 
 // stores highscores to local storage
 function setHighscore() {
-    localStorage.setItem("initials", JSON.stringify(initials))
-    localStorage.setItem("scores", JSON.stringify(scores))
-    console.log("scores saved")
+    console.log(scores.length)
+
+    if (scores.length == 0) {
+        scores.unshift(currentScore)
+        initials.unshift(input.value)
+
+        localStorage.setItem("initials", JSON.stringify(initials))
+        localStorage.setItem("scores", JSON.stringify(scores))
+        console.log("New highscore saved")
+        return
+    } else {
+        i = 0
+        while (i <= scores.length) {
+            if (currentScore <= scores[i]) {
+                i++
+            } else {
+                scores.splice(i, 0, currentScore)
+                initials.splice(i, 0, input.value)
+                    
+                localStorage.setItem("initials", JSON.stringify(initials))
+                localStorage.setItem("scores", JSON.stringify(scores))
+                console.log("scores saved")
+                break
+            }
+        }
+    }
 }
 
 function viewHighscores() {
@@ -64,8 +89,10 @@ function viewHighscores() {
         scoreList.appendChild(li)
     }
 }
+
+// triggers out of time function
 let timeUp = document.getElementById("time-up")
- function timesUp() {
+function timesUp() {
     let timeLeft = 2
     console.log("Time's Up")
     timeUp.textContent = "Time's Up!"
@@ -83,13 +110,13 @@ let timeUp = document.getElementById("time-up")
 }
 
 // countdown timer
-let totalTime = 1 // TODO: make sure timer is set to 75
+let totalTime = 60 // TODO: make sure timer is set to 60
 let mainInterval = 0
 function countdown() {
     mainInterval = setInterval(function() {
         totalTime--
         timer.textContent = totalTime
-    if (totalTime == 0) {
+    if (totalTime <= 0) {
         clearInterval(mainInterval)
         timesUp()
     }
@@ -100,6 +127,7 @@ function countdown() {
 function displayWrong() {
     let timeLeft = 2
     totalTime -= 10
+    questionNumber++
 
     console.log("Wrong")
     guess.textContent = "Wrong."
@@ -113,31 +141,19 @@ function displayWrong() {
         console.log("Moving On")
         guess.textContent = ""
         guess.setAttribute("style", "border-top: none")
+        displayQuestion()
     }
     }, 1000)
 }
-// displays for each question (individual)
-function displayQuestion1() {
-    questionText.textContent = questions.question[0]
-    for (i = 1; i <= 4; i++) {
-        let li = document.createElement("button")
-        li.textContent = i + ". " + questions.answer1[i-1]
-        li.setAttribute("id", "answer" + i)
-        answerText.appendChild(li)
-    }
-    let answerButton1 = document.getElementById("answer1")
-    let answerButton2 = document.getElementById("answer2")
-    let answerButton3 = document.getElementById("answer3")
-    let answerButton4 = document.getElementById("answer4")
-    answerButton1.addEventListener("click", displayWrong)
-    answerButton2.addEventListener("click", displayWrong)
-    answerButton3.addEventListener("click", displayQuestion2)
-    answerButton4.addEventListener("click", displayWrong)
-}
 
-function displayQuestion2() {
+// displays when wrong answer is selected
+function displayCorrect() {
     let timeLeft = 2
-    console.log("Question 1: Correct") // TODO: convert to display message
+    currentScore += 5
+
+    console.log("Correct")
+    console.log("Current Score: " + currentScore)
+    
     guess.textContent = "Correct!"
     guess.setAttribute("id", "guess")
     guess.setAttribute("style", "border-top: 3px lightgrey solid")
@@ -146,10 +162,39 @@ function displayQuestion2() {
         timeLeft--
     if (timeLeft == 0) {
         clearInterval(timeInterval)
-        answerText.textContent = ""
-        questionText.textContent = questions.question[1]
+        console.log("Moving On")
         guess.textContent = ""
         guess.setAttribute("style", "border-top: none")
+        questionNumber++
+        displayQuestion()
+        console.log(questionNumber)
+    }
+    if (timeLeft == 0 && questionNumber == 6)
+        endScreen()
+    }, 1000)
+}
+
+// displays for each question (individual)
+function displayQuestion() {
+    if (questionNumber == 1) {
+        questionText.textContent = questions.question[0]
+        for (i = 1; i <= 4; i++) {
+            let li = document.createElement("button")
+            li.textContent = i + ". " + questions.answer1[i-1]
+            li.setAttribute("id", "answer" + i)
+            answerText.appendChild(li)
+        }
+        let answerButton1 = document.getElementById("answer1")
+        let answerButton2 = document.getElementById("answer2")
+        let answerButton3 = document.getElementById("answer3")
+        let answerButton4 = document.getElementById("answer4")
+        answerButton1.addEventListener("click", displayWrong)
+        answerButton2.addEventListener("click", displayWrong)
+        answerButton3.addEventListener("click", displayCorrect)
+        answerButton4.addEventListener("click", displayWrong)
+    } else if (questionNumber == 2) {
+        questionText.textContent = questions.question[1]
+        answerText.textContent = ""
         for (i = 1; i <= 4; i++) {
             let li = document.createElement("button")
             li.textContent = i + ". " + questions.answer2[i-1]
@@ -162,27 +207,11 @@ function displayQuestion2() {
         let answerButton4 = document.getElementById("answer4")
         answerButton1.addEventListener("click", displayWrong)
         answerButton2.addEventListener("click", displayWrong)
-        answerButton3.addEventListener("click", displayQuestion3)
+        answerButton3.addEventListener("click", displayCorrect)
         answerButton4.addEventListener("click", displayWrong)
-    }
-    }, 1000)
-}
-
-function displayQuestion3() {
-    let timeLeft = 2
-    console.log("Question 2: Correct") // TODO: convert to display message
-    guess.textContent = "Correct!"
-    guess.setAttribute("id", "guess")
-    guess.setAttribute("style", "border-top: 5px grey solid")
-
-    let timeInterval = setInterval(function() {
-        timeLeft--
-    if (timeLeft == 0) {
-        clearInterval(timeInterval)
-        answerText.textContent = ""
+    } else if (questionNumber == 3) {
         questionText.textContent = questions.question[2]
-        guess.textContent = ""
-        guess.setAttribute("style", "border-top: none")
+        answerText.textContent = ""
         for (i = 1; i <= 4; i++) {
             let li = document.createElement("button")
             li.textContent = i + ". " + questions.answer3[i-1]
@@ -195,27 +224,11 @@ function displayQuestion3() {
         let answerButton4 = document.getElementById("answer4")
         answerButton1.addEventListener("click", displayWrong)
         answerButton2.addEventListener("click", displayWrong)
-        answerButton3.addEventListener("click", displayWrong)
-        answerButton4.addEventListener("click", displayQuestion4)
-    }
-    }, 1000)
-}
-
-function displayQuestion4() {
-    let timeLeft = 2
-    console.log("Question 3: Correct") // TODO: convert to display message
-    guess.textContent = "Correct!"
-    guess.setAttribute("id", "guess")
-    guess.setAttribute("style", "border-top: 5px grey solid")
-
-    let timeInterval = setInterval(function() {
-        timeLeft--
-    if (timeLeft == 0) {
-        clearInterval(timeInterval)
-        answerText.textContent = ""
+        answerButton3.addEventListener("click", displayCorrect)
+        answerButton4.addEventListener("click", displayWrong)
+    } else if (questionNumber == 4) {
         questionText.textContent = questions.question[3]
-        guess.textContent = ""
-        guess.setAttribute("style", "border-top: none")
+        answerText.textContent = ""
         for (i = 1; i <= 4; i++) {
             let li = document.createElement("button")
             li.textContent = i + ". " + questions.answer4[i-1]
@@ -228,27 +241,11 @@ function displayQuestion4() {
         let answerButton4 = document.getElementById("answer4")
         answerButton1.addEventListener("click", displayWrong)
         answerButton2.addEventListener("click", displayWrong)
-        answerButton3.addEventListener("click", displayQuestion5)
+        answerButton3.addEventListener("click", displayCorrect)
         answerButton4.addEventListener("click", displayWrong)
-    }
-    }, 1000)
-}
-
-function displayQuestion5() {
-    let timeLeft = 2
-    console.log("Question 4: Correct") // TODO: convert to display message
-    guess.textContent = "Correct!"
-    guess.setAttribute("id", "guess")
-    guess.setAttribute("style", "border-top: 5px grey solid")
-
-    let timeInterval = setInterval(function() {
-        timeLeft--
-    if (timeLeft == 0) {
-        clearInterval(timeInterval)
-        answerText.textContent = ""
+    } else if (questionNumber == 5) {
         questionText.textContent = questions.question[4]
-        guess.textContent = ""
-        guess.setAttribute("style", "border-top: none")
+        answerText.textContent = ""
         for (i = 1; i <= 4; i++) {
             let li = document.createElement("button")
             li.textContent = i + ". " + questions.answer5[i-1]
@@ -261,38 +258,14 @@ function displayQuestion5() {
         let answerButton4 = document.getElementById("answer4")
         answerButton1.addEventListener("click", displayWrong)
         answerButton2.addEventListener("click", displayWrong)
-        answerButton3.addEventListener("click", displayWrong)
-        answerButton4.addEventListener("click", displayCorrect)
+        answerButton3.addEventListener("click", displayCorrect)
+        answerButton4.addEventListener("click", displayWrong)
     }
-    }, 1000)
-}
-
-// display for getting question 5 correct
-function displayCorrect() {
-    let timeLeft = 2
-    console.log("Question 5: Correct") // TODO: convert to display message
-    guess.textContent = "Correct!"
-    guess.setAttribute("id", "guess")
-    guess.setAttribute("style", "border-top: 5px grey solid")
-
-    let timeInterval = setInterval(function() {
-        timeLeft--
-    if (timeLeft == 0) {
-        clearInterval(timeInterval)
-        clearInterval(mainInterval)
-        questionText.innerHTML = "" // removes main content
-        answerText.innerHTML = "" // removes main content
-
-        guess.textContent = ""
-        guess.setAttribute("style", "border-top: none")
-
-        endScreen()
-    }
-    }, 1000)
 }
 
 // display end screen
 function endScreen() {
+    clearInterval(mainInterval)
     questionText.innerHTML = "" // removes main content
     answerText.innerHTML = "" // removes main content
 
@@ -313,6 +286,7 @@ function endScreen() {
     quiz.appendChild(flex)
 
     let input = document.createElement("input")
+    input.setAttribute("id", "input")
     input.setAttribute("type", "text")
     input.setAttribute("style", "width:15%")
     flex.appendChild(input)
@@ -323,6 +297,9 @@ function endScreen() {
     submit.setAttribute("style", "width:10%")
     flex.appendChild(submit)
 
+    currentScore += Number(timer.textContent)
+    console.log(currentScore)
+
     submit.addEventListener("click", setHighscore)
 }
 
@@ -332,7 +309,7 @@ function startQuiz() {
     quiz.innerHTML = "" // removes main content
     highscoreButton.textContent = "" // removes view highscores button
 
-    displayQuestion1()
+    displayQuestion()
 }
 
 // pulls local data for previous scores (if any)
