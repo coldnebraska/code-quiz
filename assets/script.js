@@ -10,9 +10,8 @@ let timer = document.getElementById("timer")
 let questionText = document.getElementById("question")
 let answerText = document.getElementById("answers")
 let guess = document.getElementById("guess")
+let questionDisplay = document.getElementById("question-display")
 
-// TODO: add clear highscores button
-// TODO: make submit button redirect to highscores
 
 // object of the five questions and their respective choices
 let questions = {
@@ -29,6 +28,11 @@ let currentScore = 0
 
 let initials =  []
 let scores =  []
+
+// refreshes page to bring back to main menu
+function pageRefresh() {
+    window.location.reload()
+}
 
 // stores highscores to local storage
 function setHighscore() {
@@ -58,6 +62,7 @@ function setHighscore() {
             }
         }
     }
+    viewHighscores()
 }
 
 function clearHighscores() {
@@ -77,6 +82,7 @@ function clearHighscores() {
 function viewHighscores() {
     quiz.innerHTML = "" // removes main content
     header.innerHTML = "" //removes header content
+    questionDisplay.innerHTML = "" // removes question content for end screen to highscore
 
     // adds return button to highscore page
     let returnMain = document.createElement("button")
@@ -84,10 +90,6 @@ function viewHighscores() {
     returnMain.setAttribute("id", "return-button")
     header.appendChild(returnMain)
 
-    // refreshes page to bring back to main menu
-    function pageRefresh() {
-        window.location.reload()
-    }
     returnMain.addEventListener("click", pageRefresh)
     highscoreTitle.textContent = "Highscores"
 
