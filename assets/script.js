@@ -40,7 +40,7 @@ function setHighscore() {
 
     if (scores.length == 0) {
         scores.unshift(currentScore)
-        initials.unshift(input.value)
+        initials.unshift(input.value.toUpperCase())
 
         localStorage.setItem("initials", JSON.stringify(initials))
         localStorage.setItem("scores", JSON.stringify(scores))
@@ -316,6 +316,7 @@ function endScreen() {
     let input = document.createElement("input")
     input.setAttribute("id", "input")
     input.setAttribute("type", "text")
+    input.setAttribute("maxlength", "2")
     input.setAttribute("style", "width:15%")
     flex.appendChild(input)
 
