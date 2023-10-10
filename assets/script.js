@@ -45,7 +45,8 @@ function setHighscore() {
         localStorage.setItem("initials", JSON.stringify(initials))
         localStorage.setItem("scores", JSON.stringify(scores))
         console.log("New highscore saved")
-        return
+
+        viewHighscores()
     } else {
         i = 0
         while (i <= scores.length) {
@@ -61,8 +62,8 @@ function setHighscore() {
                 break
             }
         }
+        viewHighscores()
     }
-    viewHighscores()
 }
 
 function clearHighscores() {
@@ -137,7 +138,7 @@ function timesUp() {
 }
 
 // countdown timer
-let totalTime = 60 // TODO: make sure timer is set to 60
+let totalTime = 60 // !make sure timer is set to 60
 let mainInterval = 0
 function countdown() {
     mainInterval = setInterval(function() {
@@ -347,8 +348,8 @@ function getHighscore() {
     if (getInitials !== null && getScores !== null) {
         initials = getInitials
         scores = getScores
-        console.log(initials)
-        console.log(scores)
+        console.log("Previous Initials: " + initials)
+        console.log("Previous Scores: " + scores)
     }
 }
 
