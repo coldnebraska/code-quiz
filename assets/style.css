@@ -5,6 +5,10 @@ header {
     font-size: 120%;
 }
 
+header button {
+    font-size: 90%;
+}
+
 input {
     margin: 15px;
     height: 25px;
@@ -30,7 +34,7 @@ header div {
     background-color: white;
     color: blueviolet;
     border: none;
-    margin-top: 22px;
+    margin-top: 18px;
 }
 
 #clear-button {
@@ -38,7 +42,7 @@ header div {
     background-color: white;
     color: blueviolet;
     border: none;
-    margin-top: 22px;
+    margin-top: 18px;
 }
 
 #clear-button:hover {
